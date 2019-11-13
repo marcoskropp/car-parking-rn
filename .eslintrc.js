@@ -1,0 +1,12 @@
+module.exports = {
+  root: true,
+  extends: '@react-native-community',
+  rules: {
+    'prettier/prettier': 0,
+    'curly': 0,
+    'no-undef': 0,
+    'no-return-await': 0,
+    'quote-props': 0,
+    'semi': 0
+  }
+};

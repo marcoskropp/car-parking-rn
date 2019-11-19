@@ -3,7 +3,7 @@ import { createAppContainer } from 'react-navigation'
 import { createRootNavigator } from './src/routes'
 
 const App = () => {
-  const Layout = createAppContainer(createRootNavigator(false));
+  const Layout = createAppContainer(createRootNavigator(true));
   return <Layout />
 }
 

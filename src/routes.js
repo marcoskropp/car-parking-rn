@@ -10,7 +10,9 @@ import { ReservePlace } from './scenes/ResevePlace/ReservePlace'
 import { Home } from './scenes/Home/Home'
 import { Vehicle } from './scenes/Vehicle/Vehicle'
 import { People } from './scenes/People/People'
-  console.log(Home)
+import { CreateVehicle } from './scenes/Vehicle/CreateVehicle'
+import { UpdateVehicle } from './scenes/Vehicle/UpdateVehicle'
+
 Icon.loadFont()
 
 export const LoggedOut = createStackNavigator({
@@ -22,27 +24,26 @@ export const LoggedOut = createStackNavigator({
   }
 })
 
+const tabBar = (tintColor, iconName) => (
+  <View>
+    <Icon style={[{ color: tintColor }]} size={25} name={iconName} />
+  </View>
+)
+
 export const LoggedIn = createMaterialBottomTabNavigator(
   {
     Home: {
       screen: Home,
       navigationOptions: {
         tabBarLabel: 'Home',
-        tabBarIcon: ({ tintColor }) => (
-          <View>
-            <Icon style={[{ color: tintColor }]} size={25} name={'ios-home'} />
-          </View>
-        )
+        tabBarIcon: ({ tintColor }) => tabBar(tintColor, 'ios-home')
       }
     },
     ReservePlace: {
       screen: ReservePlace,
       navigationOptions: {
         tabBarLabel: 'Reserve Place',
-        tabBarIcon: ({ tintColor }) => (
-          <View>
-            <Icon style={[{ color: tintColor }]} size={25} name={'ios-film'} />
-          </View>)
+        tabBarIcon: ({ tintColor }) => tabBar(tintColor, 'ios-film')
       }
     },
     Person: {
@@ -52,11 +53,7 @@ export const LoggedIn = createMaterialBottomTabNavigator(
         activeColor: '#f60c0d',
         inactiveColor: '#f65a22',
         barStyle: { backgroundColor: '#f69b31' },
-        tabBarIcon: ({ tintColor }) => (
-          <View>
-            <Icon style={[{ color: tintColor }]} size={25} name={'ios-person'} />
-          </View>
-        )
+        tabBarIcon: ({ tintColor }) => tabBar(tintColor, 'ios-person')
       }
     },
     Vehicle: {
@@ -66,11 +63,7 @@ export const LoggedIn = createMaterialBottomTabNavigator(
         activeColor: '#615af6',
         inactiveColor: '#46f6d7',
         barStyle: { backgroundColor: '#67baf6' },
-        tabBarIcon: ({ tintColor }) => (
-          <View>
-            <Icon style={[{ color: tintColor }]} size={25} name={'ios-car'} />
-          </View>
-        )
+        tabBarIcon: ({ tintColor }) => tabBar(tintColor, 'ios-car')
       }
     }
   },
@@ -91,6 +84,12 @@ export const createRootNavigator = (loggedIn = true) => {
       },
       LoggedOut: {
         screen: LoggedOut
+      },
+      CreateVehicle: {
+        screen: CreateVehicle
+      },
+      UpdateVehicle: {
+        screen: UpdateVehicle
       }
     },
     {

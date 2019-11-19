@@ -7,6 +7,9 @@ module.exports = {
     'no-undef': 0,
     'no-return-await': 0,
     'quote-props': 0,
-    'semi': 0
+    'semi': 0,
+    'comma-dangle': 0,
+    'eol-last': 0,
+    'jsx-quotes': 0
   }
 };

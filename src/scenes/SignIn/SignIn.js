@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, Button, View, TextInput } from 'react-native'
-import { Formik } from 'formik';
+import { Formik } from 'formik'
 
 import { login } from '../../services/Auth.services'
 

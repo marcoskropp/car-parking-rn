@@ -1,29 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, FlatList, Button } from 'react-native'
 import ActionButton from 'react-native-action-button'
 
 import styles from '../../styles/global'
 
-export const Vehicle = ({ navigation }) => {
+import { index, destroy } from '../../services/Vehicle.services'
+
+export const Vehicles = ({ navigation }) => {
+  const [vehicles, setVehicles] = useState(null)
+
+  useEffect(() => {
+    getVehicles()
+  })
+
+  const getVehicles = async () => {
+    setVehicles(await index())
+  }
+
+  const removeVehicle = async id => {
+    await destroy(id)
+    setVehicles(await index())
+  }
+
   return (
     <View style={styles.container}>
       <Text>Vehicle Screen</Text>
       <FlatList
-        data={[
-          { plate: 'OYK-6651', description: 'Description OYK' },
-          { plate: 'KRP-2266', description: 'Description KRP' },
-          { plate: 'TOP-1238', description: 'Description TOP' }
-        ]}
+        data={vehicles}
         renderItem={
-          ({ item: { plate, description } }) =>
+          ({ item: { id, plate, description } }) =>
             <View>
               <Text>{plate} - {description}</Text>
               <Button
-                onPress={() => navigation.navigate('UpdateVehicle')}
+                onPress={() => navigation.navigate('UpdateVehicle', { id, plate, description })}
                 title='Edit'
               />
               <Button
-                onPress={() => console.log('remove')}
+                onPress={() => removeVehicle(id)}
                 title='Remove'
               />
             </View>

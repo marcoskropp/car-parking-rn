@@ -8,10 +8,12 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { SignIn } from './scenes/SignIn/SignIn'
 import { ReservePlace } from './scenes/ResevePlace/ReservePlace'
 import { Home } from './scenes/Home/Home'
-import { Vehicle } from './scenes/Vehicle/Vehicle'
+import { Vehicles } from './scenes/Vehicles/Vehicles'
 import { People } from './scenes/People/People'
-import { CreateVehicle } from './scenes/Vehicle/CreateVehicle'
-import { UpdateVehicle } from './scenes/Vehicle/UpdateVehicle'
+import { CreateVehicle } from './scenes/Vehicles/CreateVehicle'
+import { UpdateVehicle } from './scenes/Vehicles/UpdateVehicle'
+import { CreatePerson } from './scenes/People/CreatePerson'
+import { UpdatePerson } from './scenes/People/UpdatePerson'
 
 Icon.loadFont()
 
@@ -46,7 +48,7 @@ export const LoggedIn = createMaterialBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => tabBar(tintColor, 'ios-film')
       }
     },
-    Person: {
+    People: {
       screen: People,
       navigationOptions: {
         tabBarLabel: 'Person',
@@ -56,10 +58,10 @@ export const LoggedIn = createMaterialBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => tabBar(tintColor, 'ios-person')
       }
     },
-    Vehicle: {
-      screen: Vehicle,
+    Vehicles: {
+      screen: Vehicles,
       navigationOptions: {
-        tabBarLabel: 'Vehicle',
+        tabBarLabel: 'Vehicles',
         activeColor: '#615af6',
         inactiveColor: '#46f6d7',
         barStyle: { backgroundColor: '#67baf6' },
@@ -90,6 +92,12 @@ export const createRootNavigator = (loggedIn = true) => {
       },
       UpdateVehicle: {
         screen: UpdateVehicle
+      },
+      CreatePerson: {
+        screen: CreatePerson
+      },
+      UpdatePerson: {
+        screen: UpdatePerson
       }
     },
     {

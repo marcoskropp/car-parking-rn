@@ -1,21 +1,16 @@
 import { AsyncStorage } from '@react-native-community/async-storage'
 
 const token = 'asdasd'//`Bearer ${AsyncStorage.getItem('jwt_token')}`
-const HOST_API = 'http://localhost:3333'
+const HOST_API = 'http://10.0.3.2:3333'
 
 export async function index() {
-  console.log(HOST_API)
   const response = await fetch(`${HOST_API}/people`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    /*headers: {
-      Authorization: token
-    }*/
+    method: 'GET'
   })
 
-  return await response.json()
+  const responseJson = await response.json()
+
+  return responseJson.people
 }
 
 export async function store(person) {
@@ -40,8 +35,12 @@ export async function show(id) {
 }
 
 export async function update(person) {
+  console.log(person)
   const response = await fetch(`${HOST_API}/people/${person.id}`, {
     method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify(person)
   });
 

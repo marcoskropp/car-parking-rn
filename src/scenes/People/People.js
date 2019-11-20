@@ -7,11 +7,11 @@ import styles from '../../styles/global'
 import { index, destroy } from '../../services/People.services'
 
 export const People = ({ navigation }) => {
-  const [people, setPeople] = useState(null)
+  const [people, setPeople] = useState([])
 
   useEffect(() => {
     getPeople()
-  })
+  }, [])
 
   const getPeople = async () => {
     setPeople(await index())
@@ -26,14 +26,7 @@ export const People = ({ navigation }) => {
     <View style={styles.container}>
       <Text>People Screen</Text>
       <FlatList
-        data={people
-          /*  [
-              { id: 1, name: 'Marcos', cpf: '313710982', phone: '999460446' },
-              { id: 2, name: 'Joao', cpf: '3137709123', phone: '9994601233' },
-              { id: 3, name: 'Cleyd', cpf: '413610982', phone: '99946044123' }
-            ]
-          */
-        }
+        data={people}
         renderItem={
           ({ item: { id, name, cpf, phone } }) =>
             <View>

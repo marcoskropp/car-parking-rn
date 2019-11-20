@@ -1,7 +1,7 @@
 import { AsyncStorage } from '@react-native-community/async-storage'
 
 const token = 'asdasd'//`Bearer ${AsyncStorage.getItem('jwt_token')}`
-const HOST_API = 'http://localhost:3333'
+const HOST_API = 'http://10.0.3.2:3333'
 
 export async function index() {
   console.log(HOST_API)

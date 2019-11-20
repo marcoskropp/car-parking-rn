@@ -7,11 +7,11 @@ import styles from '../../styles/global'
 import { index, destroy } from '../../services/Vehicle.services'
 
 export const Vehicles = ({ navigation }) => {
-  const [vehicles, setVehicles] = useState(null)
+  const [vehicles, setVehicles] = useState([])
 
   useEffect(() => {
     getVehicles()
-  })
+  }, [])
 
   const getVehicles = async () => {
     setVehicles(await index())

@@ -6,7 +6,9 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import { createStackNavigator } from 'react-navigation-stack';
 
 import { SignIn } from './scenes/SignIn/SignIn'
-import { ReservePlace } from './scenes/ResevePlace/ReservePlace'
+import { Sections } from './scenes/Sections/Sections'
+import { CreateSection } from './scenes/Sections/CreateSection'
+import { UpdateSection } from './scenes/Sections/UpdateSection'
 import { Home } from './scenes/Home/Home'
 import { Vehicles } from './scenes/Vehicles/Vehicles'
 import { People } from './scenes/People/People'
@@ -41,10 +43,10 @@ export const LoggedIn = createMaterialBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => tabBar(tintColor, 'ios-home')
       }
     },
-    ReservePlace: {
-      screen: ReservePlace,
+    Sections: {
+      screen: Sections,
       navigationOptions: {
-        tabBarLabel: 'Reserve Place',
+        tabBarLabel: 'Section',
         tabBarIcon: ({ tintColor }) => tabBar(tintColor, 'ios-film')
       }
     },
@@ -98,6 +100,12 @@ export const createRootNavigator = (loggedIn = true) => {
       },
       UpdatePerson: {
         screen: UpdatePerson
+      },
+      CreateSection: {
+        screen: CreateSection
+      },
+      UpdateSection: {
+        screen: UpdateSection
       }
     },
     {

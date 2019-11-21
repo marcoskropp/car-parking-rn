@@ -14,15 +14,13 @@ export async function index() {
 }
 
 export async function store(person) {
-  const response = await fetch(`${HOST_API}/people`, {
+  await fetch(`${HOST_API}/people`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(person)
   });
-
-  await response.json();
 }
 
 

@@ -32,3 +32,9 @@ export async function update(section) {
     body: JSON.stringify(section)
   })
 }
+
+export async function destroy(id) {
+  await fetch(`${HOST_API}/sections/${id}`, {
+    method: 'DELETE'
+  });
+}

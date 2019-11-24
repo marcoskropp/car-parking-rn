@@ -14,8 +14,10 @@ import { Vehicles } from './scenes/Vehicles/Vehicles'
 import { People } from './scenes/People/People'
 import { CreateVehicle } from './scenes/Vehicles/CreateVehicle'
 import { UpdateVehicle } from './scenes/Vehicles/UpdateVehicle'
+import { ShowVehicle } from './scenes/Vehicles/ShowVehicle'
 import { CreatePerson } from './scenes/People/CreatePerson'
 import { UpdatePerson } from './scenes/People/UpdatePerson'
+import { Parkings } from './scenes/Parkings/Parkings'
 
 Icon.loadFont()
 
@@ -95,6 +97,9 @@ export const createRootNavigator = (loggedIn = true) => {
       UpdateVehicle: {
         screen: UpdateVehicle
       },
+      ShowVehicle: {
+        screen: ShowVehicle
+      },
       CreatePerson: {
         screen: CreatePerson
       },
@@ -106,6 +111,9 @@ export const createRootNavigator = (loggedIn = true) => {
       },
       UpdateSection: {
         screen: UpdateSection
+      },
+      Parkings: {
+        screen: Parkings
       }
     },
     {

@@ -10,6 +10,7 @@ module.exports = {
     'semi': 0,
     'comma-dangle': 0,
     'eol-last': 0,
-    'jsx-quotes': 0
+    'jsx-quotes': 0,
+    'react-hooks/exhaustive-deps': 0
   }
 };

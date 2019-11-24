@@ -23,12 +23,16 @@ export const Sections = ({ navigation }) => {
       <FlatList
         data={sections}
         renderItem={
-          ({ item: { id, name, vacancies } }) =>
+          ({ item: { id, name, vacancies, parkings } }) =>
             <View>
               <Text>{name} - {vacancies}</Text>
               <Button
                 onPress={() => navigation.navigate('UpdateSection', { id, name, vacancies })}
                 title='Edit'
+              />
+              <Button
+                onPress={() => navigation.navigate('Parkings', { id })}
+                title='Show'
               />
             </View>
         }

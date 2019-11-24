@@ -23,6 +23,16 @@ export async function store(section) {
   })
 }
 
+export async function show(id) {
+  const response = await fetch(`${HOST_API}/sections/${id}`, {
+    method: 'GET'
+  })
+
+  const responseJson = await response.json()
+
+  return responseJson.section
+}
+
 export async function update(section) {
   await fetch(`${HOST_API}/sections/${section.id}`, {
     method: 'PUT',

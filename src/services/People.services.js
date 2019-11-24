@@ -20,16 +20,18 @@ export async function store(person) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(person)
-  });
+  })
 }
 
 
 export async function show(id) {
   const response = await fetch(`${HOST_API}/people/${id}`, {
     method: 'GET'
-  });
+  })
 
-  return await response.json();
+  const responseJson = await response.json()
+
+  return responseJson.person
 }
 
 export async function update(person) {
@@ -40,7 +42,7 @@ export async function update(person) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(person)
-  });
+  })
 
   return await response.json();
 }

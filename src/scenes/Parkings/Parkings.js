@@ -5,6 +5,7 @@ import ActionButton from 'react-native-action-button'
 import styles from '../../styles/global'
 
 import { show } from '../../services/Sections.services'
+import { destroy } from '../../services/Parkings.services'
 
 export const Parkings = ({ navigation }) => {
   const { state: { params: { id } } } = navigation
@@ -19,21 +20,27 @@ export const Parkings = ({ navigation }) => {
     setSection(await show(id))
   }
 
+  const removeVehicle = async parkingId => {
+    await destroy(parkingId)
+
+    getSection()
+  }
+
   return (
     <View style={styles.container}>
       <Text>Parkings Screen - {section.name} - Vacancies: {section.vacancies}</Text>
       <FlatList
         data={section.parkings}
         renderItem={
-          ({ item: { car_id } }) =>
+          ({ item: { id: parkingId, car_id } }) =>
             <View>
               <Text>ID: {car_id}</Text>
               <Button
-                onPress={() => navigation.navigate('ShowVehicle', { car_id, routeBack: 'Parkings' })}
+                onPress={() => navigation.navigate('ShowVehicle', { car_id, routeBack: 'Sections' })}
                 title='Show Vehicle'
               />
               <Button
-                onPress={() => console.log('top')}
+                onPress={() => removeVehicle(parkingId)}
                 title='Remove Vehicle'
               />
             </View>
@@ -42,7 +49,7 @@ export const Parkings = ({ navigation }) => {
       <Button title='Back' onPress={() => navigation.navigate('Sections')} />
       <ActionButton
         buttonColor='rgb(83, 126, 197)'
-        onPress={() => { navigation.navigate('CreateParking') }}
+        onPress={() => { navigation.navigate('CreateParking', { sectionId: id }) }}
       />
     </View>
   )

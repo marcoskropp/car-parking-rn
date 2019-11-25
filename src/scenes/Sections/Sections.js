@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Button} from 'react-native';
+import { View, Text, FlatList, Button } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Title from '../../components/Title';
+import Loader from '../../components/Loader';
 import styles from '../../styles/global';
 
 import { index } from '../../services/Sections.services';
 
 export const Sections = ({ navigation }) => {
   const [sections, setSections] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getSections();
   }, []);
 
   const getSections = async () => {
+    setLoading(true)
     setSections(await index());
+    setLoading(false)
   };
+
+  if (loading) return <Loader />
 
   return (
     <View style={styles.container}>

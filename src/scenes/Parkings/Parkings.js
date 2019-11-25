@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, FlatList, Button } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
 import ActionButton from 'react-native-action-button'
+import Loader from '../../components/Loader';
+import Button from '../../components/Button';
 
 import styles from '../../styles/global'
 
@@ -11,13 +13,16 @@ export const Parkings = ({ navigation }) => {
   const { state: { params: { id } } } = navigation
 
   const [section, setSection] = useState({})
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getSection()
   }, [])
 
   const getSection = async () => {
+    setLoading(true)
     setSection(await show(id))
+    setLoading(false)
   }
 
   const removeVehicle = async parkingId => {
@@ -25,6 +30,8 @@ export const Parkings = ({ navigation }) => {
 
     getSection()
   }
+
+  if (loading) return <Loader />
 
   return (
     <View style={styles.container}>
@@ -46,7 +53,13 @@ export const Parkings = ({ navigation }) => {
             </View>
         }
       />
-      <Button title='Back' onPress={() => navigation.navigate('Sections')} />
+      <View style={styles.formGroup}>
+        <Button
+          onPress={() => navigation.navigate('Sections')}
+          style={styles.btnSecondary}
+          title="Back"
+        />
+      </View>
       <ActionButton
         buttonColor='rgb(83, 126, 197)'
         onPress={() => { navigation.navigate('CreateParking', { sectionId: id }) }}

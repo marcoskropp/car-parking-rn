@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, Alert, ToolbarAndroid} from 'react-native';
+import {View, Text, FlatList, Alert} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import IconButton from '../../components/IconButton';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Title from '../../components/Title';
+import Loader from '../../components/Loader';
 
 import styles from '../../styles/global';
 
@@ -11,13 +12,16 @@ import {index, destroy} from '../../services/Vehicle.services';
 
 export const Vehicles = ({navigation}) => {
   const [vehicles, setVehicles] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getVehicles();
   }, []);
 
   const getVehicles = async () => {
+    setLoading(true)
     setVehicles(await index());
+    setLoading(false)
   };
 
   const removeVehicle = id => () => {
@@ -34,6 +38,8 @@ export const Vehicles = ({navigation}) => {
       },
     ]);
   };
+
+  if (loading) return <Loader />
 
   return (
     <View style={styles.container}>

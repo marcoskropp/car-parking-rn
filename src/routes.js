@@ -1,41 +1,41 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
-import { createSwitchNavigator } from 'react-navigation'
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
-import { createStackNavigator } from 'react-navigation-stack';
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {createSwitchNavigator} from 'react-navigation';
+import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
+import {createStackNavigator} from 'react-navigation-stack';
 
-import { SignIn } from './scenes/SignIn/SignIn'
-import { Sections } from './scenes/Sections/Sections'
-import { CreateSection } from './scenes/Sections/CreateSection'
-import { UpdateSection } from './scenes/Sections/UpdateSection'
-import { Home } from './scenes/Home/Home'
-import { Vehicles } from './scenes/Vehicles/Vehicles'
-import { People } from './scenes/People/People'
-import { CreateVehicle } from './scenes/Vehicles/CreateVehicle'
-import { UpdateVehicle } from './scenes/Vehicles/UpdateVehicle'
-import { ShowVehicle } from './scenes/Vehicles/ShowVehicle'
-import { CreatePerson } from './scenes/People/CreatePerson'
-import { UpdatePerson } from './scenes/People/UpdatePerson'
-import { Parkings } from './scenes/Parkings/Parkings'
-import { CreateParking } from './scenes/Parkings/CreateParking'
+import {SignIn} from './scenes/SignIn/SignIn';
+import {Sections} from './scenes/Sections/Sections';
+import {CreateSection} from './scenes/Sections/CreateSection';
+import {UpdateSection} from './scenes/Sections/UpdateSection';
+import {Home} from './scenes/Home/Home';
+import {Vehicles} from './scenes/Vehicles/Vehicles';
+import {People} from './scenes/People/People';
+import {CreateVehicle} from './scenes/Vehicles/CreateVehicle';
+import {UpdateVehicle} from './scenes/Vehicles/UpdateVehicle';
+import {ShowVehicle} from './scenes/Vehicles/ShowVehicle';
+import {CreatePerson} from './scenes/People/CreatePerson';
+import {UpdatePerson} from './scenes/People/UpdatePerson';
+import {Parkings} from './scenes/Parkings/Parkings';
+import {CreateParking} from './scenes/Parkings/CreateParking';
 
-Icon.loadFont()
+Icon.loadFont();
 
 export const LoggedOut = createStackNavigator({
   SignIn: {
     screen: SignIn,
     navigationOptions: {
-      header: null
-    }
-  }
-})
+      header: null,
+    },
+  },
+});
 
 const tabBar = (tintColor, iconName) => (
   <View>
-    <Icon style={[{ color: tintColor }]} size={25} name={iconName} />
+    <Icon style={[{color: tintColor}]} size={25} name={iconName} />
   </View>
-)
+);
 
 export const LoggedIn = createMaterialBottomTabNavigator(
   {
@@ -43,85 +43,79 @@ export const LoggedIn = createMaterialBottomTabNavigator(
       screen: Home,
       navigationOptions: {
         tabBarLabel: 'Home',
-        tabBarIcon: ({ tintColor }) => tabBar(tintColor, 'ios-home')
-      }
+        tabBarIcon: ({tintColor}) => tabBar(tintColor, 'ios-home'),
+      },
     },
     Sections: {
       screen: Sections,
       navigationOptions: {
         tabBarLabel: 'Section',
-        tabBarIcon: ({ tintColor }) => tabBar(tintColor, 'ios-film')
-      }
+        tabBarIcon: ({tintColor}) => tabBar(tintColor, 'ios-film'),
+      },
     },
     People: {
       screen: People,
       navigationOptions: {
         tabBarLabel: 'Person',
-        activeColor: '#f60c0d',
-        inactiveColor: '#f65a22',
-        barStyle: { backgroundColor: '#f69b31' },
-        tabBarIcon: ({ tintColor }) => tabBar(tintColor, 'ios-person')
-      }
+        tabBarIcon: ({tintColor}) => tabBar(tintColor, 'ios-person'),
+      },
     },
     Vehicles: {
       screen: Vehicles,
       navigationOptions: {
         tabBarLabel: 'Vehicles',
-        activeColor: '#615af6',
-        inactiveColor: '#46f6d7',
-        barStyle: { backgroundColor: '#67baf6' },
-        tabBarIcon: ({ tintColor }) => tabBar(tintColor, 'ios-car')
-      }
-    }
+        tabBarIcon: ({tintColor}) => tabBar(tintColor, 'ios-car'),
+      },
+    },
   },
   {
     initialRouteName: 'Home',
     activeColor: '#f0edf6',
     inactiveColor: '#226557',
     swipeEnabled: true,
-    barStyle: { backgroundColor: '#3BAD87' }
-  }
-)
+    barStyle: {backgroundColor: '#3BAD87'},
+  },
+);
 
 export const createRootNavigator = (loggedIn = true) => {
   return createSwitchNavigator(
     {
       LoggedIn: {
-        screen: LoggedIn
+        screen: LoggedIn,
       },
       LoggedOut: {
-        screen: LoggedOut
+        screen: LoggedOut,
       },
       CreateVehicle: {
-        screen: CreateVehicle
+        screen: CreateVehicle,
       },
       UpdateVehicle: {
-        screen: UpdateVehicle
+        screen: UpdateVehicle,
       },
       ShowVehicle: {
-        screen: ShowVehicle
+        screen: ShowVehicle,
       },
       CreatePerson: {
-        screen: CreatePerson
+        screen: CreatePerson,
       },
       UpdatePerson: {
-        screen: UpdatePerson
+        screen: UpdatePerson,
       },
       CreateSection: {
-        screen: CreateSection
+        screen: CreateSection,
       },
       UpdateSection: {
-        screen: UpdateSection
+        screen: UpdateSection,
       },
       Parkings: {
-        screen: Parkings
+        screen: Parkings,
       },
       CreateParking: {
-        screen: CreateParking
-      }
+        screen: CreateParking,
+      },
     },
     {
-      initialRouteName: loggedIn ? 'LoggedIn' : 'LoggedOut'
-    }
+      initialRouteName: loggedIn ? 'LoggedIn' : 'LoggedOut',
+    },
   );
 };

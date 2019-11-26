@@ -17,7 +17,7 @@ export const CreateVehicle = ({navigation}) => {
 
   return (
     <Formik
-      initialValues={{plate: '', description: ''}}
+      initialValues={{plate: '', description: '', personId: ''}}
       onSubmit={values => submit(values)}>
       {({handleChange, handleBlur, handleSubmit, values}) => (
         <View style={styles.container}>
@@ -37,6 +37,15 @@ export const CreateVehicle = ({navigation}) => {
               onChangeText={handleChange('description')}
               onBlur={handleBlur('description')}
               value={values.description}
+              style={styles.textInput}
+            />
+          </View>
+          <View style={styles.formGroup}>
+            <Text>Person Id</Text>
+            <TextInput
+              onChangeText={handleChange('personId')}
+              onBlur={handleBlur('personId')}
+              value={values.personId}
               style={styles.textInput}
             />
           </View>

@@ -52,6 +52,18 @@ export default styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
   },
+  btnPrimaryRound: {
+    borderRadius: 50,
+    padding: 5,
+    backgroundColor: 'rgb(83, 126, 197)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 30,
+    width: 30,
+    marginLeft: 5,
+    marginRight: 5,
+  },
   btnWarningRound: {
     borderRadius: 50,
     padding: 5,

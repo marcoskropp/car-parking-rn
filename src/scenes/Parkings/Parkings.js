@@ -1,57 +1,87 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, FlatList } from 'react-native'
-import ActionButton from 'react-native-action-button'
+import React, {useState, useEffect} from 'react';
+import {View, Text, FlatList, Alert} from 'react-native';
+import ActionButton from 'react-native-action-button';
 import Loader from '../../components/Loader';
+import IconButton from '../../components/IconButton';
+import Title from '../../components/Title';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Button from '../../components/Button';
+import styles from '../../styles/global';
 
-import styles from '../../styles/global'
+import {show} from '../../services/Sections.services';
+import {destroy} from '../../services/Parkings.services';
 
-import { show } from '../../services/Sections.services'
-import { destroy } from '../../services/Parkings.services'
+export const Parkings = ({navigation}) => {
+  const {
+    state: {
+      params: {id},
+    },
+  } = navigation;
 
-export const Parkings = ({ navigation }) => {
-  const { state: { params: { id } } } = navigation
-
-  const [section, setSection] = useState({})
-  const [loading, setLoading] = useState(false)
+  const [section, setSection] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getSection()
-  }, [])
+    getSection();
+  }, []);
 
   const getSection = async () => {
-    setLoading(true)
-    setSection(await show(id))
-    setLoading(false)
-  }
+    const data = await show(id);
+    setSection(data);
+    setLoading(false);
+  };
 
   const removeVehicle = async parkingId => {
-    await destroy(parkingId)
+    Alert.alert('Delete', 'Do you want to delete this parking?', [
+      {
+        text: 'Yes',
+        onPress: async () => {
+          await destroy(parkingId);
+          getSection();
+        },
+      },
+      {
+        text: 'Cancel',
+      },
+    ]);
+  };
 
-    getSection()
-  }
-
-  if (loading) return <Loader />
+  if (loading) return <Loader />;
 
   return (
     <View style={styles.container}>
-      <Text>Parkings Screen - {section.name} - Vacancies: {section.vacancies}</Text>
+      <Title
+        text={`Parkings Screen - Section ${section.name} - Vacancies: ${section.vacancies}`}
+      />
       <FlatList
         data={section.parkings}
-        renderItem={
-          ({ item: { id: parkingId, car_id } }) =>
-            <View>
-              <Text>ID: {car_id}</Text>
-              <Button
-                onPress={() => navigation.navigate('ShowVehicle', { car_id, routeBack: 'Sections' })}
-                title='Show Vehicle'
-              />
-              <Button
-                onPress={() => removeVehicle(parkingId)}
-                title='Remove Vehicle'
-              />
-            </View>
-        }
+        keyExtractor={item => `${item.id}`}
+        renderItem={({
+          item: {
+            id: parkingId,
+            car_id,
+            car: {description},
+          },
+        }) => (
+          <View style={styles.listRow}>
+            <Text>{description}</Text>
+            <IconButton
+              style={styles.btnPrimaryRound}
+              onPress={() =>
+                navigation.navigate('ShowVehicle', {
+                  car_id,
+                  routeBack: 'Sections',
+                })
+              }>
+              <Icon size={15} name="visibility" />
+            </IconButton>
+            <IconButton
+              onPress={() => removeVehicle(parkingId)}
+              style={styles.btnErrorRound}>
+              <Icon size={15} name="delete" />
+            </IconButton>
+          </View>
+        )}
       />
       <View style={styles.formGroup}>
         <Button
@@ -61,9 +91,11 @@ export const Parkings = ({ navigation }) => {
         />
       </View>
       <ActionButton
-        buttonColor='rgb(83, 126, 197)'
-        onPress={() => { navigation.navigate('CreateParking', { sectionId: id }) }}
+        buttonColor="rgb(83, 126, 197)"
+        onPress={() => {
+          navigation.navigate('CreateParking', {sectionId: id});
+        }}
       />
     </View>
-  )
-}
+  );
+};

@@ -12,16 +12,15 @@ import {index, destroy} from '../../services/Vehicle.services';
 
 export const Vehicles = ({navigation}) => {
   const [vehicles, setVehicles] = useState([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getVehicles();
   }, []);
 
   const getVehicles = async () => {
-    setLoading(true)
     setVehicles(await index());
-    setLoading(false)
+    setLoading(false);
   };
 
   const removeVehicle = id => () => {
@@ -39,13 +38,14 @@ export const Vehicles = ({navigation}) => {
     ]);
   };
 
-  if (loading) return <Loader />
+  if (loading) return <Loader />;
 
   return (
     <View style={styles.container}>
       <Title text="Vehicles" />
       <FlatList
         data={vehicles}
+        keyExtractor={item => `${item.id + item.plate}`}
         renderItem={({item: {id, plate, description}}) => (
           <View style={styles.listRow}>
             <Text style={styles.rowItem}>{plate}</Text>
